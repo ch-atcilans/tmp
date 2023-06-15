@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .loading-screen {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f1f1f1;
+    }
+
+    .loading-animation {
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.2) 100%);
+      position: relative;
+      animation: sparkle 2s infinite linear;
+    }
+
+    .sparkle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #FFF;
+      border-radius: 50%;
+      animation: sparkleEffect 1s infinite linear;
+    }
+
+    @keyframes sparkle {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes sparkleEffect {
+      0% { opacity: 0; }
+      50% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    #website-content {
+      display: none;
+      /* Add styling for the website content */
+    }
+
+    .loaded {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="loading-screen">
+    <div class="loading-animation">
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+    </div>
+  </div>
+  
+  <div id="website-content">
+    <!-- Your website content goes here -->
+    <h1>Welcome to My Website</h1>
+    <p>This is the content of my website.</p>
+  </div>
+  
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        // Hide the loading screen and show the website content
+        document.querySelector('.loading-screen').style.display = 'none';
+        document.getElementById('website-content').style.display = 'block';
+      }, 2000); // Delay in milliseconds (2 seconds)
+    });
+  </script>
+</body>
+</html>
