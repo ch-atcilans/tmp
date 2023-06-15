@@ -2,58 +2,99 @@
 <html>
 <head>
   <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
     .loading-screen {
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background-color: #f1f1f1;
+      background: linear-gradient(to bottom, #232526, #414345);
+      perspective: 800px;
+      overflow: hidden;
     }
 
     .loading-animation {
-      width: 100px;
-      height: 100px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.2) 100%);
+      width: 200px;
+      height: 200px;
       position: relative;
-      animation: sparkle 2s infinite linear;
+      transform-style: preserve-3d;
+      animation: spin 2s infinite linear;
     }
 
-    .sparkle {
+    .box {
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 40px;
+      height: 40px;
       background-color: #FFF;
-      border-radius: 50%;
-      animation: sparkleEffect 1s infinite linear;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      animation: rotate 2s infinite linear;
     }
 
-    @keyframes sparkle {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .box:nth-child(1) {
+      top: 0;
+      left: 50%;
+      transform-origin: 0 0;
+      animation-delay: 0s;
     }
 
-    @keyframes sparkleEffect {
-      0% { opacity: 0; }
-      50% { opacity: 1; }
-      100% { opacity: 0; }
+    .box:nth-child(2) {
+      top: 50%;
+      right: 0;
+      transform-origin: 100% 50%;
+      animation-delay: 0.5s;
+    }
+
+    .box:nth-child(3) {
+      bottom: 0;
+      left: 50%;
+      transform-origin: 0 100%;
+      animation-delay: 1s;
+    }
+
+    .box:nth-child(4) {
+      top: 50%;
+      left: 0;
+      transform-origin: 0 50%;
+      animation-delay: 1.5s;
+    }
+
+    @keyframes spin {
+      0% { transform: rotateY(0deg); }
+      100% { transform: rotateY(360deg); }
+    }
+
+    @keyframes rotate {
+      0% { transform: rotateZ(0deg); }
+      100% { transform: rotateZ(360deg); }
     }
 
     #website-content {
       display: none;
       /* Add styling for the website content */
+      color: #FFF;
+      text-align: center;
+      padding: 20px;
+      animation: fade-in 1s ease-in;
     }
 
-    .loaded {
-      display: none;
+    .loaded #website-content {
+      display: block;
     }
   </style>
 </head>
 <body>
   <div class="loading-screen">
     <div class="loading-animation">
-      <div class="sparkle"></div>
-      <div class="sparkle"></div>
-      <div class="sparkle"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
+      <div class="box"></div>
     </div>
   </div>
   
@@ -67,8 +108,7 @@
     window.addEventListener('load', function() {
       setTimeout(function() {
         // Hide the loading screen and show the website content
-        document.querySelector('.loading-screen').style.display = 'none';
-        document.getElementById('website-content').style.display = 'block';
+        document.querySelector('.loading-screen').classList.add('loaded');
       }, 2000); // Delay in milliseconds (2 seconds)
     });
   </script>
